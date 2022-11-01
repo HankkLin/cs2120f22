@@ -24,7 +24,9 @@ State and prove the proposition that there's some
 natural number whose square is 144.
 -/
 
-example : _ := _
+example : 
+  (∃ (n : ℕ ), n*n=144)  :=               
+    exists.intro 12 rfl
 
 
 /- #1B.
@@ -35,8 +37,11 @@ for string.append, the function for gluing two
 strings together into one.
 -/
 
-example : _ := _
-
+example:
+  (∃ (s : string ), (s ++ "!") → string)  :=    
+  /-
+  I'm not sure why but the ++ is not working for me. 
+  -/
 /- #1C.
 
 Formally state and prove the proposition that
@@ -46,9 +51,11 @@ takes just one witness as a time, so you will
 have to apply it more than once.
 -/
 
-example : _ :=
-begin
-end
+example: (∃ (x y z : ℕ ), x*x + y*y = z*z) → true :=
+  begin
+  exists.intro (3 exists.intro (4, exists.intro(5,rfl))) ,
+
+  end
 
 /- #1D
 Define predicate called pythag_triple taking
