@@ -51,10 +51,12 @@ takes just one witness as a time, so you will
 have to apply it more than once.
 -/
 
-example: (∃ (x y z : ℕ ), x*x + y*y = z*z) → true :=
+example: (∃ (x y z : ℕ ), x*x + y*y = z*z):=
   begin
-  exists.intro (3 exists.intro (4, exists.intro(5,rfl))) ,
-
+  apply exists.intro 3,
+  apply exists.intro 4,
+  apply exists.intro 5,
+  exact rfl,
   end
 
 /- #1D
@@ -63,7 +65,7 @@ three natural number arguments, x, y, and z,
 yielding the proposition that x*x + y*y = z*z.
 -/
 
-def pythag_triple (x y z : ℕ) := _
+def pythag_triple (x y z : ℕ) := (x*x + y*y = z*z) → true
 
 /- #1E
 State the propositionthat there exist x, y, z, 
@@ -71,9 +73,13 @@ natural numbers, that satisfy the pythag_triple,
 predicate, then prove it. (Use "example : ...")
 -/
 
-example : _  :=
+example : ∃ (x y z : ℕ), pythag_triple x y z :=
 begin
-_
+  unfold pythag_triple,
+  apply exists.intro 3,
+  apply exists.intro 4,
+  apply exists.intro 5,
+  exact rfl,
 end
 
 /- #2A
@@ -86,7 +92,7 @@ n to be a multiple of m? There has to be some
 other number involved, right?
 -/
 
-def multiple_of (n m : ℕ) := ∃ (k), n = m * k  
+def multiple_of (n m : ℕ) := ∃ (k), n = m * k → true
 
 /- #2B
 
@@ -147,7 +153,9 @@ begin
 ring 
 end  
 -- Enlish proof (it's short!): 
-
+n+(m+k) normal form is n+m+k.
+(n+K)+m normal form is n+m+k.
+Prove by rfl. 
 /-
 Whoa! It's so easy to prove addition associative? 
 Yep. Thankfully someone else wrote this beautiful 
@@ -192,6 +200,14 @@ has to be. Also, be sure to use multiple_of in
 formally stating the proposition to be proved.
 -/
 
+/-
+English proof:
+My 2A starts differently so it odesn't envolve k. 
+Assume a natural number n that n % 6 = 0
+divide both side by 2 and we can get ->  (n % 3) / 2 = 0
+by ring, we can get n % 6 = 0
+-/
+
 example : _ :=
 begin
 _
@@ -216,6 +232,14 @@ and your goal will mean exactly the same thing.
 The rewrite tactic uses the axiom that states
 that you can replace equals by equals without
 changing the truth values of propositions. 
+-/
+
+/-
+English proof:
+Assume a natural number n that n % h = 0. (n is a multiple of h)
+since h is a multiple of k, then h/k must be a natural number. 
+multiple both side by (h/k) and we can get ->  (n % h) / (h/k) = 0
+by ring, we can get (n%k) = 0, which indicate n is a multiple of k.
 -/
 
 example (n h k : ℕ) : _ :=
@@ -246,7 +270,7 @@ example
   (SomeoneKnowsLogic : ∃ (p), KnowsLogic p) :
   _ :=
 begin
-_
+
 end
 
 
