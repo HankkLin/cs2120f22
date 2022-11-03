@@ -248,3 +248,75 @@ def id_boolean: bool -> bool
 
 def id_T (T: Type): T → T
 | t := t
+
+
+
+example : ¬ negation tt tt := 
+begin 
+ --proof bby negation
+ assume h, -- assume the hypothesis is true
+  cases h,
+end
+
+
+def negation : bool → bool → Prop
+| tt ff := true
+| ff tt := true
+| _ _ := false
+
+example : negation ff tt :=
+begin
+ unfold negation
+end
+
+example : ¬ negation tt tt := 
+begin 
+ --proof by negation
+ assume h, -- assume the hypothesis is true
+  cases h,
+end
+----------------------------------------------------------------------------------------------
+example: ∀ (b1 b2), negation b1 b2 ↔ bnot b1 = b2 :=
+begin
+  assume b1 b2,
+  split,
+  -- What should be our proof strategy from here?
+  -- Exercise: complete this proof.
+  intro h,
+  cases b1,
+  cases b2,
+  cases h, -- ff ff
+  exact rfl, -- ff tt
+
+  cases b2, -- again cuz now is second part of b1
+  exact rfl, -- tt ff
+  cases h, -- tt tt
+  -- first direction complee, now the opposite direction
+
+  assume h,
+  cases b1,
+  cases b2,
+  cases h, -- ff ff
+  unfold negation, -- ff tt
+
+  cases b2,
+  unfold negation, -- tt ff
+  cases h,
+
+end 
+
+
+def StringLength (n : ℕ )(s : string) : Prop :=  s.length = n
+
+example : StringLength 0 "" := rfl
+example : StringLength 3 "aBC" := rfl
+example : StringLength 10 "ABCDEFGHIJ" := rfl
+
+
+def string2len : string → nat → Prop := λ s n, s.length = n
+
+example: string2len "Lean!" 5 :=
+begin
+unfold string2len,
+exact rfl,
+end
