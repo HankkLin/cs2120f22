@@ -199,20 +199,24 @@ of question is to figure out what that number
 has to be. Also, be sure to use multiple_of in
 formally stating the proposition to be proved.
 -/
+def multiple_of (n m : ℕ) := ∃ (k), n = m * k → true
 
 /-
 English proof:
-My 2A starts differently so it odesn't envolve k. 
-Assume a natural number n that n % 6 = 0
-divide both side by 2 and we can get ->  (n % 3) / 2 = 0
-by ring, we can get n % 6 = 0
+For all natural numbers that satisfy multiple of 6 also satisfy multiple of 3.
+multiple of 6 indicate that there must exist a natural number k that n = 6 *k.
+multiple of 3 indicate that there must exist a natural number k2 that n = 3 *k2.
+so we can try to prove that if k exist then k2 must exist.
+Already know that k can be any other number depend on n.
+assume a natural number X.
+Then prove that there must exist a number X2 that X * 2 = X2.
+apply that to k2 in multiple_of 3 to prove k2 exist if k exist.
 -/
 
-example : _ :=
+example : ∀ (n:ℕ), multiple_of n 6 → multiple_of n 3 :=
 begin
-_
-end 
 
+end 
 
 /- #2C.
 
@@ -236,13 +240,23 @@ changing the truth values of propositions.
 
 /-
 English proof:
-Assume a natural number n that n % h = 0. (n is a multiple of h)
-since h is a multiple of k, then h/k must be a natural number. 
-multiple both side by (h/k) and we can get ->  (n % h) / (h/k) = 0
-by ring, we can get (n%k) = 0, which indicate n is a multiple of k.
+For all natural numbers n that satisfy multiple of h 
+if h satisfy multiple of k, then n is a multiple of k
+
+n is a multiple of h indicate that there must exist a natural number X that n = h *X.
+h is a multiple of k indicate that there must exist a natural number X2 that h = k *X2.
+n is a multiple of k indicate that there must exist a natural number X3 that n = k *X3.
+so we can try to prove that if X and X2 exist then X3 must exist.
+
+Already know that X can be any other number depend on n.
+X2 could also be any number depend on h.
+assume two natural numbers Y and Y2 exist.
+Then prove that there must exist a number Y3 that Y * Y2 = Y3.
+apply Y3 that to X3 in multiple_of k to prove X3 exist if X and X2 exist.
 -/
 
-example (n h k : ℕ) : _ :=
+example : ∀ (n h k:ℕ), multiple_of n h ∧ multiple_of h k → multiple_of n k :=
+
 begin
 _
 end
@@ -261,17 +275,21 @@ conclusion (first hole/underscore). All
 you then have to do is to fill in is the
 proof (second _).
 -/
-
 example 
   (Person : Type)
+  (p: Person)
   (KnowsLogic : Person → Prop)
   (isCool : Person → Prop)
   (LogicMakesCool : ∀ (p), KnowsLogic p → isCool p)
   (SomeoneKnowsLogic : ∃ (p), KnowsLogic p) :
-  _ :=
+  KnowsLogic p → isCool p :=
 begin
+assume h,
+cases h with x LogicMakesCool,
 
 end
+
+
 
 
 /- #3B
@@ -283,10 +301,10 @@ someone is not happy then not everyone is happy.
 example 
   (Person : Type)
   (Happy : Person → Prop) :
-  _
+  (∃ (p : Person), ¬ Happy p → ¬ ∀ (x: Person), Happy x)
   :=
 begin
-  _
+  
 end
 
 /- #3C
@@ -309,7 +327,7 @@ your set of assumptions.
 example 
   (α : Type)
   (P : α → Prop) :
-  _ :=
+   ∀ (x: α), P x → ¬ ∃ (y: α), ¬ P y :=
 begin
 end 
 
@@ -328,7 +346,7 @@ taking objects of that type.
 example 
   (T : Type)
   (P : T → Prop) :
-  _ :=
+  ¬ ∃ (t : T), P t → ∀ (t: T), ¬ P t :=
 begin
 _
 end
@@ -346,7 +364,7 @@ example
   (α : Type)
   (P : α → Prop)
   (Q : α → Prop): 
-  _ :=
+  ∃ (a : α ), P a ∨ Q a → (∃ (b: α ), P b) ∧ (∃ (c : α ) Q c) :=
 begin
 end
 
