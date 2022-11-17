@@ -133,7 +133,7 @@ set comprehension (set builder) notation and
 the perfectSquare predicate.
 -/
 
-def perfectSquare (n : ℕ) : Prop := ∃ x: ℕ, n^1/2 = x /-write like this to prevent n to be negative-/
+def perfectSquare (n : ℕ) : Prop := ∃ x: ℕ, x^2 = n
 
 
 /- C [5 point].
@@ -144,8 +144,9 @@ notation in writing your proposition.
 -/
 
 
-example : _ :=
+example : perfectSquare 25 :=
 begin
+exact rfl,
 end
 
 
