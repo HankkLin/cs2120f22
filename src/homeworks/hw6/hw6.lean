@@ -43,7 +43,7 @@ case where n = n' + 2, it's fib n' + fib n'+1
 def fib : ℕ → ℕ 
 | 0 := 0
 | 1 := 1
-| (n' + 2) := _
+| (n' + 2) := fib n' + fib (n'+1)
 
 -- These test cases should pass except the last 
 example : fib 0 = 0 := rfl
@@ -67,10 +67,9 @@ if m is zero, just return n; otherwise, if m
 is (m' + 1), return the sum of n and m' plus
 one. (That's still the right answer, right!)
 -/
-
 def add : ℕ → ℕ → ℕ 
 | n 0 := n
-| n (m' + 1) := _
+| n (m' + 1) := n + m' + 1
 
 -- These test cases should pass except the last 
 example : add 0 0 = 0 := rfl
