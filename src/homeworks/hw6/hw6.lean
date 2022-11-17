@@ -172,9 +172,19 @@ using set and set operator notations.
 
 
 -- 1. intersection
-example : _ :=
+example : 4 ∈ X ∧ 4 ∈ Y :=
 begin
-_
+apply and.intro,
+
+show 4 = 2 ∨ 4 = 3 ∨ 4 = 4,
+right,
+right,
+exact rfl,
+
+show 4 = 4 = 4 ∨ 5 = 4 ∨ 6,
+left,
+left,
+exact rfl, 
 end
 
 -- 2. union
