@@ -93,7 +93,8 @@ any function, f : α → α.
 -/
 
 def involutive {α : Sort u} (f : α → α) := 
-  _
+  ∀ (x : α), 
+  f (f x) = x,
 
 /-
 Now prove the proposition that the Boolean negation 
