@@ -213,17 +213,21 @@ goal and proceed accordingly.
 -/
 
 -- 3. difference
-example : _ :=
+example : ¬ (4 ∈ X \ Y) :=
 begin
-_
+assume h,
+let n : 4 ∈ {4, 5, 6} := _
+
+
 end
 
-
 -- 4. complement
-example : _ :=
+example : 4 ∈ Xᶜ ∧ 4 ∈ Yᶜ  :=
 begin
-_
-end 
+apply and.intro,
+
+
+end
 
 
 
