@@ -123,8 +123,7 @@ your answer. Remember: Predicates take values
 to propositions. 
 -/
 
-def perfectSquare (n : ℕ) : Prop := _
-
+def perfectSquare (n : ℕ) : Prop := ∃ x: ℕ, x^2 = n
 
 /- B [5 points].
 
@@ -133,8 +132,7 @@ set comprehension (set builder) notation and
 the perfectSquare predicate.
 -/
 
-def perfectSquare (n : ℕ) : Prop := ∃ x: ℕ, x^2 = n
-
+def perfectSquares : set ℕ := def perfectSquares : set ℕ := { n : ℕ | perfectSquare n }
 
 /- C [5 point].
 
@@ -172,7 +170,7 @@ using set and set operator notations.
 
 
 -- 1. intersection
-example : 4 ∈ X ∧ 4 ∈ Y :=
+example : 4 ∈ X ∩ Y :=
 begin
 apply and.intro,
 
@@ -181,15 +179,18 @@ right,
 right,
 exact rfl,
 
-show 4 = 4 = 4 ∨ 5 = 4 ∨ 6,
-left,
 left,
 exact rfl, 
 end
 
 -- 2. union
-example : _ :=
+example : 4 ∈ X ∪ Y :=
 begin
+
+left,
+right,
+right,
+exact rfl, 
 end
 
 
