@@ -255,7 +255,8 @@ in the rest!
 def single_valued   -- predicate on relations
 {α β : Type} 
 (r : α → β → Prop) 
-: Prop := _
+: Prop := 
+∀ (a b c), r a b ∧ r a c → b = c
 
 /- Part #2 [5 points]
 
@@ -264,7 +265,7 @@ sq x y is satisfied iff y is the square of x.
 -/
 
 def sqrs : ℕ → ℕ → Prop 
-| x y := _
+| x y := x^2 = y
 
 /- Part #3 [5 points] 
 
@@ -294,7 +295,7 @@ def injective
 (r : α → β → Prop)  -- any relation on α and β 
 (a b : α)           -- any two arbitrary α values
 (x : β) :           -- any β value
-Prop := _
+Prop := r a x ∧ r b x → a = b
 
 
 /- C [10 points].
