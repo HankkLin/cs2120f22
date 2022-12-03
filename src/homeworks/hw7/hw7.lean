@@ -12,6 +12,7 @@ English language proof.
 
 example (α : Type) (P : α → Prop) : (∃ a, P a) → (¬(∀ x, ¬ P x)) :=
 begin
+
 end
 
 
@@ -38,7 +39,17 @@ A. Is this relation reflexive?
 B. Is this relation symmetric? 
 C. Is this relation transitive? 
 D. Is this relation an equivalence relation? 
+
+A. Yes. The binary relation r has (0,0), (1,1), (2,2) in the relation, 
+which the output is equal to the input.
+B. Yes. A symmetric relation means that r a b →  r b a. In this case, 
+the relatio r has output that equal to the input, indicate that this is a symmetric relation.
+C. Yes. A transitive relation r suggest that arb ∧ brc →  arc. 
+In the relation, all natural number imply itself (e.g. 0 implies 0 in (0,0)); thus we can write that 0 r 0 ∧ 0 r 0 →  0 r 0.
+D. Yes. Since this relation is reflexive, symmetric, and transitive, it is an equivalence relation. 
+
 -/
+
 
 
 
@@ -49,6 +60,12 @@ if, for all values in its domain, a and b, if r a b
 and if r b a then a = b. Give an example of a familiar
 arithmetic relation that's anti-symmetric, and briefly
 explain why it's so.
+
+We can write this into:
+(α : Type) (r : α → α), ∀ a b ∈ α, arb ∧ bra → a = b
+Equal is a binary relation that satisfy anti-symetric.
+That is if a = b and b = a, then a and b must be the same value. 
+
 -/
 
 
@@ -70,7 +87,9 @@ def is_asymmetric
 Name a familar arithmetic relation that's asymmetric
 and briefly explain why you think it's asymmetric.
 
-Answer here:
+Answer here: > or < are both asymmetric relation. 
+A > B is true suggest that B > A must be false. 
+In other word, A > B and B > A can't coexist. 
 -/
 
 /- C: 
