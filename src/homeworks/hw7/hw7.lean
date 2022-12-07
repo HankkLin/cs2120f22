@@ -12,7 +12,12 @@ English language proof.
 
 example (α : Type) (P : α → Prop) : (∃ a, P a) → (¬(∀ x, ¬ P x)) :=
 begin
-
+assume h,
+cases h with hw hh, /-hw : α, hh : P α -/
+assume k, /-if there exist object with type α with property P,
+ then not all object α don't have P implies false.-/
+ have nhh := k hw, /-apply hw to k to show the contradiction-/
+ contradiction,
 end
 
 
@@ -40,13 +45,13 @@ B. Is this relation symmetric?
 C. Is this relation transitive? 
 D. Is this relation an equivalence relation? 
 
-A. Yes. The binary relation r has (0,0), (1,1), (2,2) in the relation, 
-which the output is equal to the input.
+A. No. The binary relation r has (0,0), (1,1), (2,2) in the domian of definition, 
+but not the entire domain is included.
 B. Yes. A symmetric relation means that r a b →  r b a. In this case, 
 the relatio r has output that equal to the input, indicate that this is a symmetric relation.
 C. Yes. A transitive relation r suggest that arb ∧ brc →  arc. 
 In the relation, all natural number imply itself (e.g. 0 implies 0 in (0,0)); thus we can write that 0 r 0 ∧ 0 r 0 →  0 r 0.
-D. Yes. Since this relation is reflexive, symmetric, and transitive, it is an equivalence relation. 
+D. No. Since this relation is not reflexive, symmetric, it is not an equivalence relation. 
 
 -/
 
@@ -103,6 +108,8 @@ assume that r is asymmetric). Now assume r a a. <finish
 the proof>.
 
 Answer here (rest of proof): 
+
+If r is asymmetric, then r a a must imply false; thus, assume r a a must be false. 
 -/
 
 /- D.
@@ -120,6 +127,7 @@ example
 ¬ ∃ (a : α), r a a :=
 begin
 -- proof by negation
+
 
 end
 
@@ -162,8 +170,25 @@ reflexive, symmetric, and transitive. They are as we
 have covered in class. 
 -/
 
+def equiv_mod_m (m : ℕ) : ℕ → ℕ → Prop := 
+  λ p q : ℕ, p % m = q % m
+
+
 example : ∀ m : ℕ, equivalence (equiv_mod_m m) :=
 begin
+assume h,
+unfold equivalence,
+
+apply (and.intro _ _),
+unfold reflexive,
+assume x,
+unfold equiv_mod_m,
+
+apply (and.intro _ _),
+unfold symmetric,
+assume x,
+
+unfold transitive,
 end
 
 
@@ -179,12 +204,12 @@ a very brief justification of each answer. Assume
 the domain is all living persons, and the co-domain
 is all natural numbers.
 
--- it's a function: 
--- it's total: 
--- it's injective (where "): 
--- it's surjective (where the co-domain is all ℕ):
--- it's strictly partial:  
--- it's bijective: 
+-- it's a function: Yes. Because one person only have at most one id.
+-- it's total: No. Not all living person have US taxpayer i.d.
+-- it's injective (where "): Yes. One id onlt have one user.
+-- it's surjective (where the co-domain is all ℕ): No. not every natural number is id.
+-- it's strictly partial: Yes. Some ppl don't have id.
+-- it's bijective: No. The range isn't equal to the co-domain. 
 -/
 
 
@@ -195,9 +220,9 @@ numbers. Which of the following properties does
 it have? Explain each answer enough to show you
 know why your answer is correct.
 
--- reflexive:
--- symmetric: 
--- transitive:
+-- reflexive: No. No number is relate to itself in r.
+-- symmetric: Yes. Since it is empty, it can be generalize as symmetric. 
+-- transitive: Yes. Same, because it is empty. 
 -/
 
 
@@ -252,9 +277,10 @@ S (of objects of some type), is a partial order.
 Pf:  
 Suppose S is a set, with a ⊆ S and b ⊆ S subsets. Then
 
-1. 
-2. 
-3. 
+1. Reflexive: a is a subset of itslef, so it's reflexive
+2. Anti-symmetric: If all value in a is relate to b, and all value in b is relate to a, 
+then a is a subset of b and b is a subset of a; thus a = b, so it is anti-symmetric
+3. Transitive: it is transitive because all subsets of a is also the subset of S because a is a subset of S.
 
 QED.
 -/
